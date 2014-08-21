@@ -1,5 +1,4 @@
-
-import json
+import yaml
 import os
 
 
@@ -12,21 +11,23 @@ def _get_datadir(data_directory=None):
 
 
 def get_attribute(hiera_config, facts, attribute_name):
-    
-    files = _get_datadir(hiera_config[':json'][':datadir'])
+    print "checking yaml"
+    files = _get_datadir(hiera_config[':yaml'][':datadir'])
     print files
     for h in hiera_config[':hierarchy']:
         if h != 'common':
             try:
-                hiera_file = '%s.json' % h % facts
+                hiera_file = '%s.yaml' % h % facts
             except KeyError:
                 continue
         else:
             hiera_file = 'common'
         
         if hiera_file in files:
-            data = json.load(open("%s/%s" % (hiera_config[':json'][':datadir'], hiera_file)))
-            if attribute_name in data:
-                return data[attribute_name]
-                
-    return False
+            data = yaml.load(open("%s/%s" % (hiera_config[':yaml'][':datadir'], hiera_file)))
+            
+            if data is not None:
+                if attribute_name in data:
+                    return data[attribute_name]
+            else:
+                continue

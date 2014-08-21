@@ -25,11 +25,13 @@ class Hiera():
             self.hiera_config = yaml.load(f)
 
     def get_attribute(self, attribute_name) :
-        print self.hiera_config[':backends']
+        attribute = None
         for backend in self.hiera_config[':backends']:
             try:
-                return getattr(plugins.json, 'get_attribute')(self.hiera_config, self.facts, attribute_name)
+                attribute =  getattr(getattr(plugins, 'hiera_%s' % backend), 'get_attribute')(self.hiera_config, self.facts, attribute_name)
             except AttributeError:
-                next
-        
+                continue
+            if attribute is not None:
+                return attribute
+        return attribute
         

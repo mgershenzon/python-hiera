@@ -1,5 +1,6 @@
 ---
 :backends:
+  - yaml
   - json
 :yaml:
   :datadir: /Users/mrochford/code/python-hiera/test/yaml_data
