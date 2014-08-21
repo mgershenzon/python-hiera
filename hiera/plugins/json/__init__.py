@@ -17,7 +17,10 @@ def get_attribute(hiera_config, facts, attribute_name):
     print files
     for h in hiera_config[':hierarchy']:
         if h != 'common':
-            hiera_file = '%s.json' % h % facts
+            try:
+                hiera_file = '%s.json' % h % facts
+            except KeyError:
+                continue
         else:
             hiera_file = 'common'
         
