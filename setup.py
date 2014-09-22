@@ -7,12 +7,12 @@ def read(fname):
 
 setup(
     name = "python-hiera",
-    version = "0.0.4",
+    version = "0.0.1",
     author = "Mike Rochford",
     author_email = "mike@mikerochford.com",
     description = (""),
     keywords = "",
     url = "",
     packages=find_packages(),
-    long_description=read('README'),
+    long_description=read('README.md'),
 )
