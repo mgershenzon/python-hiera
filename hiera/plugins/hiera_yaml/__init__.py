@@ -11,9 +11,7 @@ def _get_datadir(data_directory=None):
 
 
 def get_attribute(hiera_config, facts, attribute_name):
-    print "checking yaml"
     files = _get_datadir(hiera_config[':yaml'][':datadir'])
-    print files
     for h in hiera_config[':hierarchy']:
         if h != 'common':
             try:

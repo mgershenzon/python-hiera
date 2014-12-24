@@ -1,14 +1,23 @@
 
 import hiera
 
-hiera = hiera.Hiera('./test/hiera.yaml')
+hiera = hiera.Hiera('/Users/mrochford/personal/python-hiera/test/hiera.yaml')
 
-
-hiera.facts ={'environments': 'dev'}
+print "Dev"
+print "-" * 80
+hiera.facts ={'environment': 'dev'}
 print hiera.get_attribute('http_proxy')
+print hiera.get_attribute('smtp_server')
+print
 
-#hiera.facts ={'environment': 'prod'}
-#print hiera.get_attribute('http_proxy')
+print "Prod"
+print "-" * 80
+hiera.facts ={'environment': 'prod'}
+print hiera.get_attribute('http_proxy')
+print 
 
-#hiera.facts ={'environment': 'qa'}
-#print hiera.get_attribute('http_proxy')
+print "QA"
+print "-" * 80
+hiera.facts ={'environment': 'qa'}
+print hiera.get_attribute('http_proxy')
+print

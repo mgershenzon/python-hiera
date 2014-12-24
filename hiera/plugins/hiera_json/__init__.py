@@ -12,7 +12,6 @@ def _get_datadir(data_directory=None):
 
 
 def get_attribute(hiera_config, facts, attribute_name):
-    print "checking json"
     files = _get_datadir(hiera_config[':json'][':datadir'])
     for h in hiera_config[':hierarchy']:
         if h != 'common':
