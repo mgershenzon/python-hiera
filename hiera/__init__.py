@@ -11,15 +11,13 @@ import hiera.plugins as plugins
 
 
 class Hiera():
-    def __init__(self, hiera_config_path=None):
+    def __init__(self, hiera_config_path=None, hiera_config=None, facts={}):
         self.hiera_config_path = hiera_config_path
-        self.hiera_config = None
-        self.facts = {}
-        if self.hiera_config_path is None:
-            print "missing config"
-        else:
+        self.hiera_config = hiera_config
+        self.facts = facts
+        if self.hiera_config_path is not None:
             self._read_hiera_config()
-            
+
     def _read_hiera_config(self,):
         with open(self.hiera_config_path, 'r') as f:
             self.hiera_config = yaml.load(f)
@@ -34,4 +32,3 @@ class Hiera():
             if attribute is not None:
                 return attribute
         return attribute
-        

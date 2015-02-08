@@ -1,11 +1,8 @@
 ---
 :backends:
-  - yaml
   - json
-:yaml:
-  :datadir: /Users/mrochford/code/python-hiera/test/yaml_data
 :json:
-  :datadir: /Users/mrochford/code/python-hiera/test/json_data
+  :datadir: ~/test/python-hiera/test/json_data
 :hierarchy:
   - "env/%(environment)s"
   - "%(environment)s"

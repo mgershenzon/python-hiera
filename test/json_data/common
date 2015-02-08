@@ -1,3 +1,5 @@
 {
-    "http_proxy": "http://proxy.ghettowebhosting.com:80"
+    "port": "80",
+    "vhost": "proxy.ghettowebhosting.com",
+    "http_proxy": "http://{vhost}:{port}"
 }
