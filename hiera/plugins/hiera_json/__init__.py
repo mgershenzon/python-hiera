@@ -12,7 +12,7 @@ def _get_datadir(datadir=None):
         if os.path.exists(directory):
             for root, dirs, files in os.walk(directory, topdown=False):
                 for name in files:
-                    found_files.append((directory, os.path.join(root, name).replace("%s/" % directory,'')))
+                    found_files.append((directory, os.path.join(root, name).replace("{0}/".format(directory),'')))
     return found_files
 
 def _recursive_get_attribute(attribute, hiera_config, facts):
@@ -35,7 +35,7 @@ def get_attribute(hiera_config, facts, attribute_name):
     for h in hiera_config[':hierarchy']:
         if h != 'common':
             try:
-                hiera_file = '%s.json' % h % facts
+                hiera_file = '{0}.json'.format(h).format(**facts)
             except KeyError:
                 continue
         else:
@@ -44,7 +44,7 @@ def get_attribute(hiera_config, facts, attribute_name):
         if files:
             if hiera_file in zip(*files)[1]:
                 (datadir, hiera_file) = [seq for seq in files if seq[1] == hiera_file][0]
-                data = json.load(open("%s/%s" % (datadir, hiera_file)))
+                data = json.load(open("{0}/{1}".format(datadir, hiera_file)))
 
                 if data is not None:
                     if attribute_name in data:

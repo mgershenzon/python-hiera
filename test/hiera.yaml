@@ -4,6 +4,6 @@
 :json:
   :datadir: ~/test/python-hiera/test/json_data
 :hierarchy:
-  - "env/%(environment)s"
-  - "%(environment)s"
+  - "env/{environment}"
+  - "{environment}"
   - common

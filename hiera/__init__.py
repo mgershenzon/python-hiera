@@ -26,7 +26,7 @@ class Hiera():
         attribute = None
         for backend in self.hiera_config[':backends']:
             try:
-                attribute =  getattr(getattr(plugins, 'hiera_%s' % backend), 'get_attribute')(self.hiera_config, self.facts, attribute_name)
+                attribute =  getattr(getattr(plugins, 'hiera_{0}'.format(backend)), 'get_attribute')(self.hiera_config, self.facts, attribute_name)
             except AttributeError:
                 continue
             if attribute is not None:
