@@ -2,6 +2,7 @@ import json
 import os
 import hiera
 
+
 def _get_datadir(datadir=None):
     found_files = list()
     if isinstance(datadir, str):
@@ -12,8 +13,11 @@ def _get_datadir(datadir=None):
         if os.path.exists(directory):
             for root, dirs, files in os.walk(directory, topdown=False):
                 for name in files:
-                    found_files.append((directory, os.path.join(root, name).replace("{0}/".format(directory),'')))
+                    found_files.append((directory,
+                                        os.path.join(root,
+                                                     name).replace("{0}/".format(directory), '')))
     return found_files
+
 
 def _recursive_get_attribute(attribute, hiera_config, facts):
     replace = {}
@@ -29,6 +33,7 @@ def _recursive_get_attribute(attribute, hiera_config, facts):
                 replace[key] = internal_hiera.get_attribute(key)
         else:
             return attribute
+
 
 def get_attribute(hiera_config, facts, attribute_name):
     files = _get_datadir(hiera_config[':json'][':datadir'])
@@ -49,8 +54,9 @@ def get_attribute(hiera_config, facts, attribute_name):
                 if data is not None:
                     if attribute_name in data:
                         if isinstance(data[attribute_name], list):
-                            for i,attr in enumerate(data[attribute_name]):
-                                data[attribute_name][i] =  _recursive_get_attribute(attr, hiera_config, facts)
+                            for i, attr in enumerate(data[attribute_name]):
+                                data[attribute_name][i] = _recursive_get_attribute(attr,
+                                                                                   hiera_config, facts)
                             return data[attribute_name]
                         else:
                             return _recursive_get_attribute(data[attribute_name], hiera_config, facts)
